@@ -44,19 +44,36 @@ This project has diverged significantly from the original Windows version:
 | **Auto-Updates** | tauri-plugin-updater | Disabled |
 | **UI** | Original design | React + CSS (same design) |
 
-### Features Added in This Fork
+### Features Added (Not from Original Blur)
 
-1. **positionMode Field** - Backend support for "Current" vs "Fixed" position modes
-2. **Dev Logger** - File-based logging at `~/Library/Application Support/BlurAutoClicker/logs/`
-3. **Cached Display Height** - Prevents coordinate mismatches in multi-monitor setups
-4. **OS Catch-up Delays** - 10ms delays after mouse events for macOS reliability
-5. **PositionMode Enum** - Type-safe position handling in Rust backend
+These features were **added during the macOS port** based on research from other autoclickers:
 
-### Bug Fixes
+| Feature | Source Inspiration | Purpose |
+|---------|------------------|---------|
+| **positionMode Field** | opautoclicker.com | Backend support for "Current" vs "Fixed" modes |
+| **Current/Fixed UI Buttons** | opautoclicker.com | User selection of position mode |
+| **Dev Logger** | Best practice (custom) | File-based debugging at `~/Library/Application Support/BlurAutoClicker/logs/` |
+| **Cached Display Height** | MrTanoshii/rusty-autoclicker | Prevents coordinate mismatches |
+| **OS Catch-up Delays (10ms)** | inket/Autoclick, MrTanoshii | Allows macOS to process mouse events |
+| **PositionMode Enum** | MrTanoshii/rusty-autoclicker | Type-safe position handling in Rust |
 
-1. **Fixed position mode selection** - Current/Fixed buttons now properly connected to backend
-2. **Fixed coordinate system** - Display height caching prevents Y-axis flip issues
-3. **Fixed mouse event posting** - Added delays allow OS to process events
+### Bug Fixes (Not from Original)
+
+These bugs were **discovered and fixed during this macOS port**:
+
+| Bug | Source | Fix |
+|-----|--------|-----|
+| **Position mode not working** | Original issue | Backend now properly handles `positionMode` setting |
+| **Coordinate Y-axis flip** | Original issue | Display height caching prevents CGEvent coordinate issues |
+| **Mouse events not posting** | Original issue | Added 10ms delays after down/up events |
+
+### Features from Other Projects (Inspiration Only)
+
+These features **inspired** improvements but were implemented differently:
+
+- **inket/Autoclick** - Simpler codebase approach, higher CPS limit (900)
+- **othyn/macos-auto-clicker** - SwiftUI patterns, keyboard pressing, i18n
+- **MrTanoshii/rusty-autoclicker** - Rust architecture patterns, mouse handling
 
 ---
 
