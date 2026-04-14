@@ -1,195 +1,201 @@
 # Blur Auto Clicker for macOS
 
 <div align="center">
-    <img src="https://github.com/Blur009/Blur-AutoClicker/blob/main/public/V3.0.0_UI.png" width="600"/>
+    <img src="https://github.com/joy-arz/Blur-AutoClicker-MacOS/blob/main/public/V3.0.0_UI.png" width="600"/>
 </div>
-<p align="center"><em>An accuracy and performance focused auto clicker</em></p>
+<p align="center"><em>An accuracy and performance focused auto clicker for macOS</em></p>
 
-## ⚠️ Fork Notice
+## ⚠️ Development Status
 
-This is an **unofficial macOS fork** of the original [Blur Auto Clicker](https://github.com/Blur009/Blur-AutoClicker) project. This version ports the application to macOS while maintaining feature parity with the Windows version.
-
-**Original Project:** https://github.com/Blur009/Blur-AutoClicker
-**This Repository:** https://github.com/joy-arz/Blur-AutoClicker-MacOS
-
-## Why macOS Fork?
-
-The original Blur Auto Clicker was designed exclusively for Windows. This fork brings the same accuracy, performance, and features to macOS users. The application is rebuilt from the ground up using macOS-compatible APIs while preserving the original UI design and functionality.
+**This project is under active development. The autoclicker core functionality works, but the UI position mode selection is being refined.**
 
 ## Features
 
-<div align="center">
-    <img src="https://github.com/Blur009/Blur-AutoClicker/blob/main/public/30s_500cps_Speed_Test.png" width="600"/>
-</div>
-<p align="center"><em>Blur Auto Clicker reaching 500 CPS steadily</em></p>
+### Core Features
+- **High CPS Support** - Sustained 500+ CPS on modern hardware
+- **Toggle/Hold Modes** - Start/stop with hotkey or hold-to-click
+- **Multiple Mouse Buttons** - Left, Middle, Right click
+- **Current/Fixed Position Modes** - Click at cursor or specific coordinates
+- **Double Click Support** - Single, double, or triple clicks
+- **Duty Cycle Control** - Adjustable mouse button hold duration
+- **Speed Variation** - Randomized CPS for natural clicking
+- **Edge/Corner Stops** - Failsafe when cursor approaches boundaries
+- **Click/Time Limits** - Stop after N clicks or T seconds
+- **Global Hotkeys** - Works in background without focusing app
+- **Settings Persistence** - All preferences saved between sessions
 
 ### Simple Mode
-- On / Off Indicator (blur logo turns green when active)
-- Individual mouse button settings (left, right, middle)
-- Hold / Toggle activation modes
-- Customizable hotkeys
+- On/Off indicator (green when active)
+- CPS adjustment (per second/minute/hour/day)
+- Mouse button selection
+- Hold/Toggle activation
+- Custom hotkey support
 
-### Advanced Mode (includes all simple mode features plus)
-- Adjustable click timing (duty cycle)
-- Speed Range Mode (randomizes CPS within a range)
-- Corner and edge stopping (turns off when mouse is in corners or near edges)
-- Click and Time limits (stop after certain amount of clicks or time)
-- Double clicks
-- Position Clicking (pick a position where the mouse will move to and click)
-- CPS can be adjusted to per Second, Minute, Hour, or Day
+### Advanced Mode
+- Duty cycle (0-100% hold duration)
+- Speed variation (randomized CPS range)
+- Corner stop (TL, TR, BL, BR thresholds)
+- Edge stop (top, right, bottom, left thresholds)
+- Click limit (stop after N clicks)
+- Time limit (stop after T time)
+- Position mode (current cursor vs fixed coordinates)
+- Pick position with visual countdown
 
-### Other Features
-- Click stats (total clicks, clicks per second, etc)
-- Multiple mode tabs (Simple, Advanced, Macro, Settings)
+## Comparison with Other macOS Auto Clickers
+
+| Feature | Blur Auto Clicker | inket/Autoclick | othyn/macos-auto-clicker |
+|---------|-------------------|-----------------|--------------------------|
+| **Max CPS** | 500+ | 900 | Not specified |
+| **Position Modes** | Current + Fixed | Cursor + Fixed | Cursor + Fixed |
+| **Mouse Buttons** | Left/Middle/Right | Left/Right | All |
+| **Keyboard Pressing** | No | No | Yes |
+| **Hold/Toggle Modes** | Yes | No | Yes |
+| **Duty Cycle** | Yes | No | Yes |
+| **Speed Variation** | Yes | No | Yes |
+| **Edge/Corner Stops** | Yes | No | No |
+| **Click/Time Limits** | Yes | Yes | Yes |
+| **Hotkey Customization** | Yes | Limited | Yes |
+| **Settings Persistence** | Yes | Yes | Yes |
+| **Multiple Languages** | No | No | Yes |
+| **Color Themes** | No | No | Yes |
+| **Native UI** | React/Web | AppKit | SwiftUI |
+
+### What Blur Auto Clicker Does Better
+1. **Accuracy at High CPS** - Engineered for precision at 500+ CPS
+2. **Edge/Corner Stops** - Built-in failsafes for safety
+3. **Duty Cycle Control** - Fine-tune mouse button hold duration
+4. **Speed Variation** - Natural randomization of click timing
+5. **Rust Backend** - Memory-safe, performant core
+
+### What Others Do Better
+1. **inket/Autoclick** - Simpler codebase, higher max CPS (900)
+2. **othyn/macos-auto-clicker** - SwiftUI native, keyboard pressing, i18n, theming
 
 ## System Requirements
 
-- **Operating System:** macOS 10.15 (Catalina) or later
+- **Operating System:** macOS 12.0 (Monterey) or later
 - **Architecture:** Apple Silicon (M1/M2/M3) or Intel
+- **Permissions:** Accessibility (for mouse control)
 
 ## Installation
 
 ### DMG Installer (Recommended)
-1. Download the latest `.dmg` file from the [Releases](https://github.com/joy-arz/Blur-AutoClicker-MacOS/releases) page
+1. Download `.dmg` from [Releases](https://github.com/joy-arz/Blur-AutoClicker-MacOS/releases)
 2. Open the `.dmg` file
-3. Drag `BlurAutoClicker.app` to your Applications folder
-4. Launch from Applications (you may need to allow it in System Preferences > Privacy & Security)
+3. Drag `BlurAutoClicker.app` to Applications
+4. Right-click → Open (first time only)
+5. Grant Accessibility permission when prompted
 
 ### Manual Build
 ```bash
-# Clone the repository
 git clone https://github.com/joy-arz/Blur-AutoClicker-MacOS.git
-
-# Navigate to project directory
 cd Blur-AutoClicker-MacOS
-
-# Install dependencies
 npm install
-
-# Build for macOS
 npm run tauri build
-```
-
-The built application will be at:
-```
-src-tauri/target/release/bundle/macos/BlurAutoClicker.app
 ```
 
 ## Usage
 
 ### Default Hotkey
-The default hotkey is `Ctrl+Y` (or `Cmd+Y` on macOS keyboards - the key maps to the same physical key).
+`Ctrl+Y` (maps to Cmd+Y on Mac keyboards)
 
-### Basic Setup
-1. Launch BlurAutoClicker
-2. Select your preferred mode (Simple or Advanced)
-3. Set your desired clicks per second (CPS)
-4. Choose your mouse button (Left, Middle, or Right)
-5. Choose activation mode:
-   - **Toggle**: Press hotkey once to start, press again to stop
-   - **Hold**: Hold hotkey to click, release to stop
-6. Press the hotkey to start clicking!
+### Quick Start
+1. Launch app → Simple tab
+2. Set CPS (e.g., 25 clicks per second)
+3. Select mouse button (Left/Right/Middle)
+4. Choose mode: Toggle (start/stop) or Hold (click while held)
+5. Press `Ctrl+Y` to start → Press again to stop
 
-### Advanced Options
-- **Duty Cycle**: How long the mouse button is held down (0-100%)
-- **Speed Variation**: Randomizes CPS within a range for natural clicking
-- **Edge Stop**: Stops clicking when cursor approaches screen edges
-- **Corner Stop**: Stops clicking when cursor is in screen corners
-- **Click Limit**: Stop after a certain number of clicks
-- **Time Limit**: Stop after a certain duration
-- **Double Click**: Enable double-click mode
-- **Position Mode**: Click at a fixed screen position
+### Position Mode
+- **Current Position**: Clicks wherever cursor is located
+- **Fixed Position**: Clicks at specific X/Y coordinates
+  - Enter coordinates manually, or
+  - Click "Pick" to capture cursor position with 3-second countdown
+
+### Advanced Failsafes
+- **Edge Stop**: App stops if cursor within N pixels of screen edge
+- **Corner Stop**: App stops if cursor enters NxN corner zone
+- Both can be configured independently per edge/corner
 
 ## Architecture
 
 ### Technology Stack
-- **Frontend:** React + TypeScript + Vite
-- **Backend:** Rust + Tauri v2
-- **Mouse Events:** Core Graphics framework (macOS native)
-- **Global Shortcuts:** tauri-plugin-global-shortcut
+| Layer | Technology |
+|-------|------------|
+| Frontend | React + TypeScript + Vite |
+| Desktop | Tauri v2 |
+| Backend | Rust |
+| Mouse Events | Core Graphics |
+| Hotkeys | tauri-plugin-global-shortcut |
+| Storage | tauri-plugin-store |
 
-### Key Differences from Windows Version
-| Feature | Windows | macOS |
-|---------|---------|-------|
-| Mouse Events | SendInput API | Core Graphics |
-| Global Hotkeys | Windows API | tauri-plugin-global-shortcut |
-| Telemetry | Supabase backend | Disabled |
-| Auto-Updates | tauri-plugin-updater | Not yet implemented |
-
-### Project Structure
+### Key Files
 ```
-Blur-AutoClicker-MacOS/
-├── src/                    # React frontend
-│   ├── components/          # UI components
-│   │   └── panels/         # Mode panels (Simple, Advanced, etc.)
-│   ├── App.tsx             # Main app component
-│   ├── store.ts            # Settings state management
-│   └── hotkeys.ts         # Hotkey utilities
-├── src-tauri/              # Rust backend
-│   └── src/
-│       ├── engine/         # Click engine core
-│       │   ├── worker.rs   # Main click loop
-│       │   ├── mouse.rs    # Mouse event generation
-│       │   ├── failsafe.rs # Edge/corner detection
-│       │   ├── stats.rs    # Statistics tracking
-│       │   └── rng.rs      # Random number generation
-│       ├── settings/       # Settings management
-│       ├── hotkeys.rs      # Hotkey handling
-│       ├── telemetry.rs    # Telemetry (disabled)
-│       ├── ui_commands.rs  # Tauri commands
-│       └── updates/       # Update checker (disabled)
-└── README.md
+src-tauri/src/
+├── engine/
+│   ├── worker.rs      # Main click loop
+│   ├── mouse.rs        # Mouse event generation (CGEvent)
+│   ├── failsafe.rs     # Edge/corner detection
+│   ├── stats.rs        # Statistics tracking
+│   └── mod.rs          # Config types
+├── hotkeys.rs          # Global shortcut handling
+├── ui_commands.rs      # Tauri IPC commands
+├── settings/
+│   └── mod.rs          # ClickerSettings struct
+└── dev_logger.rs       # Debug file logging
+
+src/
+├── store.ts            # Frontend settings state
+├── App.tsx             # Main React component
+└── components/panels/  # UI panels (Simple, Advanced)
 ```
 
-## Performance
+## Recent Changes
 
-Like the Windows version, this macOS fork maintains high accuracy at high CPS rates:
-- Sustained 500+ CPS on modern hardware
-- Low CPU usage (~1% average during use)
-- ~50MB RAM usage
+### v3.2.1 (Latest)
+- Fixed position mode selection UI (Current vs Fixed buttons)
+- Added OS catch-up delays (10ms) after mouse events for reliability
+- Added dev_logger for file-based debugging
+- Implemented proper position_mode field in backend
+- Cached display height to prevent coordinate mismatches
 
-## Known Limitations
+### v3.2.0
+- Initial macOS release with Tauri v2
+- React frontend with original UI design
+- Rust backend with Core Graphics mouse events
 
-1. **Accessibility Permissions Required:** The app needs Accessibility permissions to control the mouse. macOS will prompt you to grant this on first launch.
+## Known Issues
 
-2. **Auto-Updates:** Not yet implemented on macOS. You'll need to download new versions manually.
+1. **UI Position Mode Selection** - Buttons added but styling may need adjustment
+2. **Multi-monitor** - Coordinate system may not handle multiple displays correctly
+3. **Accessibility Prompt** - May require restart after granting permissions
 
-3. **Telemetry:** Telemetry collection is disabled on macOS (no backend configured).
+## Roadmap
 
-4. **Screen Overlay:** The visual overlay showing edge/corner stop zones (from the Windows version) is not yet implemented.
-
-## Syncing with Upstream
-
-To pull updates from the original Windows repository:
-```bash
-git fetch upstream
-git merge upstream/main  # or appropriate branch
-```
+- [ ] Fix and test position mode selection UI
+- [ ] Multi-monitor support with proper coordinate handling
+- [ ] Human-like mode (smooth mouse movement between clicks)
+- [ ] Profile system (save/load different configurations)
+- [ ] Visual overlay for edge/corner stop zones
+- [ ] Better error handling and user feedback
 
 ## License
 
-This project is licensed under [GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html#license-text) - Same as the original project.
+GPL-3.0 - Same as original Blur Auto Clicker
 
-## Contributing
+## Credits
 
-Contributions are welcome! This is an unofficial port, so please keep in mind:
+- **Original Project**: [Blur009/Blur-AutoClicker](https://github.com/Blur009/Blur-AutoClicker) (Windows)
+- **macOS Port**: [joy-arz/Blur-AutoClicker-MacOS](https://github.com/joy-arz/Blur-AutoClicker-MacOS)
+- **Built with**: [Tauri v2](https://tauri.app/)
 
-1. Maintain compatibility with the original Windows version's feature set
-2. Use native macOS APIs where possible
-3. Test thoroughly on both Apple Silicon and Intel Macs
+## References
 
-## Acknowledgments
-
-- Original project by [Blur009](https://github.com/Blur009/Blur-AutoClicker)
-- Built with [Tauri v2](https://tauri.app/)
-- Inspired by the need for accurate auto-clickers at high CPS rates
-
-## Support
-
-For issues specific to this macOS fork, please open an issue on [this repository](https://github.com/joy-arz/Blur-AutoClicker-MacOS/issues).
-
-For the original Windows version and general auto-clicker questions, visit the [main repository](https://github.com/Blur009/Blur-AutoClicker).
+- [inket/Autoclick](https://github.com/inket/Autoclick) - Reference for macOS native approach
+- [othyn/macos-auto-clicker](https://github.com/othyn/macos-auto-clicker) - Reference for SwiftUI/macOS integration
+- [MrTanoshii/rusty-autoclicker](https://github.com/MrTanoshii/rusty-autoclicker) - Rust cross-platform reference
+- [opautoclicker.com](https://www.opautoclicker.com/) - Feature reference
 
 ---
 
-*Note: This is not affiliated with or endorsed by the original Blur Auto Clicker author.*
+*Note: This is an unofficial macOS port of the original Blur Auto Clicker for Windows.*

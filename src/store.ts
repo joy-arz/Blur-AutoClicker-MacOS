@@ -1,7 +1,7 @@
 import { LazyStore } from "@tauri-apps/plugin-store";
 
 const store = new LazyStore("settings.json");
-import { getVersion } from '@tauri-apps/api/app';
+import { getVersion } from "@tauri-apps/api/app";
 const version = await getVersion();
 
 export type SavedPanel = "simple" | "advanced" | "macro";
@@ -36,6 +36,7 @@ export interface Settings {
   edgeStopLeft: number;
   edgeStopRight: number;
   positionEnabled: boolean;
+  positionMode: "fixed" | "current";
   positionX: number;
   positionY: number;
   telemetryEnabled: boolean;
@@ -89,6 +90,7 @@ export const DEFAULT_SETTINGS: Settings = {
   edgeStopLeft: 40,
   edgeStopRight: 40,
   positionEnabled: false,
+  positionMode: "fixed",
   positionX: 0,
   positionY: 0,
   telemetryEnabled: false,
@@ -104,7 +106,9 @@ function sanitizeSavedPanel(value: unknown): SavedPanel {
   return value === "advanced" || value === "macro" ? value : "simple";
 }
 
-function sanitizeExplanationMode(input: Partial<Settings> | null | undefined): ExplanationMode {
+function sanitizeExplanationMode(
+  input: Partial<Settings> | null | undefined,
+): ExplanationMode {
   const saved = (input ?? {}) as Partial<Settings> & {
     functionExplanationsEnabled?: boolean;
     toolTipsEnabled?: boolean;
@@ -124,8 +128,14 @@ function sanitizeBoolean(value: unknown, fallback: boolean): boolean {
   return typeof value === "boolean" ? value : fallback;
 }
 
-function clampNumber(value: unknown, fallback: number, min?: number, max?: number) {
-  const parsed = typeof value === "number" && Number.isFinite(value) ? value : fallback;
+function clampNumber(
+  value: unknown,
+  fallback: number,
+  min?: number,
+  max?: number,
+) {
+  const parsed =
+    typeof value === "number" && Number.isFinite(value) ? value : fallback;
   const minClamped = min === undefined ? parsed : Math.max(min, parsed);
   return max === undefined ? minClamped : Math.min(max, minClamped);
 }
@@ -148,24 +158,82 @@ function sanitizeSettings(input?: Partial<Settings> | null): Settings {
     ...DEFAULT_SETTINGS,
     ...saved,
     version: version,
-    clickSpeed: clampNumber(saved.clickSpeed, DEFAULT_SETTINGS.clickSpeed, 1, 500),
-    dutyCycleEnabled: sanitizeBoolean(saved.dutyCycleEnabled, DEFAULT_SETTINGS.dutyCycleEnabled),
+    clickSpeed: clampNumber(
+      saved.clickSpeed,
+      DEFAULT_SETTINGS.clickSpeed,
+      1,
+      500,
+    ),
+    dutyCycleEnabled: sanitizeBoolean(
+      saved.dutyCycleEnabled,
+      DEFAULT_SETTINGS.dutyCycleEnabled,
+    ),
     speedVariationEnabled: sanitizeBoolean(
       saved.speedVariationEnabled,
       DEFAULT_SETTINGS.speedVariationEnabled,
     ),
-    speedVariation: clampNumber(saved.speedVariation, legacySpeedVariation, 0, 200),
-    doubleClickDelay: clampNumber(saved.doubleClickDelay, DEFAULT_SETTINGS.doubleClickDelay, 20, 9999),
+    speedVariation: clampNumber(
+      saved.speedVariation,
+      legacySpeedVariation,
+      0,
+      200,
+    ),
+    doubleClickDelay: clampNumber(
+      saved.doubleClickDelay,
+      DEFAULT_SETTINGS.doubleClickDelay,
+      20,
+      9999,
+    ),
     clickLimit: clampNumber(saved.clickLimit, DEFAULT_SETTINGS.clickLimit, 1),
     timeLimit: clampNumber(saved.timeLimit, DEFAULT_SETTINGS.timeLimit, 1),
-    cornerStopTL: clampNumber(saved.cornerStopTL, DEFAULT_SETTINGS.cornerStopTL, 0, 999),
-    cornerStopTR: clampNumber(saved.cornerStopTR, DEFAULT_SETTINGS.cornerStopTR, 0, 999),
-    cornerStopBL: clampNumber(saved.cornerStopBL, DEFAULT_SETTINGS.cornerStopBL, 0, 999),
-    cornerStopBR: clampNumber(saved.cornerStopBR, DEFAULT_SETTINGS.cornerStopBR, 0, 999),
-    edgeStopTop: clampNumber(saved.edgeStopTop, DEFAULT_SETTINGS.edgeStopTop, 0, 999),
-    edgeStopBottom: clampNumber(saved.edgeStopBottom, DEFAULT_SETTINGS.edgeStopBottom, 0, 999),
-    edgeStopLeft: clampNumber(saved.edgeStopLeft, DEFAULT_SETTINGS.edgeStopLeft, 0, 999),
-    edgeStopRight: clampNumber(saved.edgeStopRight, DEFAULT_SETTINGS.edgeStopRight, 0, 999),
+    cornerStopTL: clampNumber(
+      saved.cornerStopTL,
+      DEFAULT_SETTINGS.cornerStopTL,
+      0,
+      999,
+    ),
+    cornerStopTR: clampNumber(
+      saved.cornerStopTR,
+      DEFAULT_SETTINGS.cornerStopTR,
+      0,
+      999,
+    ),
+    cornerStopBL: clampNumber(
+      saved.cornerStopBL,
+      DEFAULT_SETTINGS.cornerStopBL,
+      0,
+      999,
+    ),
+    cornerStopBR: clampNumber(
+      saved.cornerStopBR,
+      DEFAULT_SETTINGS.cornerStopBR,
+      0,
+      999,
+    ),
+    edgeStopTop: clampNumber(
+      saved.edgeStopTop,
+      DEFAULT_SETTINGS.edgeStopTop,
+      0,
+      999,
+    ),
+    edgeStopBottom: clampNumber(
+      saved.edgeStopBottom,
+      DEFAULT_SETTINGS.edgeStopBottom,
+      0,
+      999,
+    ),
+    edgeStopLeft: clampNumber(
+      saved.edgeStopLeft,
+      DEFAULT_SETTINGS.edgeStopLeft,
+      0,
+      999,
+    ),
+    edgeStopRight: clampNumber(
+      saved.edgeStopRight,
+      DEFAULT_SETTINGS.edgeStopRight,
+      0,
+      999,
+    ),
     positionX: clampNumber(saved.positionX, DEFAULT_SETTINGS.positionX, 0),
     positionY: clampNumber(saved.positionY, DEFAULT_SETTINGS.positionY, 0),
     disableScreenshots: false,
@@ -190,11 +258,11 @@ export async function clearSavedSettings(): Promise<void> {
 }
 
 export async function hasTelemetryConsent(): Promise<boolean> {
-    const consented = await store.get<boolean>("telemetry_consented");
-    return consented === true;
+  const consented = await store.get<boolean>("telemetry_consented");
+  return consented === true;
 }
 
 export async function setTelemetryConsent(_accepted: boolean): Promise<void> {
-    await store.set("telemetry_consented", true);
-    await store.save();
+  await store.set("telemetry_consented", true);
+  await store.save();
 }
