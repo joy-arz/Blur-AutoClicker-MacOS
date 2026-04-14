@@ -17,13 +17,14 @@ fn get_display_height() -> i32 {
     *DISPLAY_HEIGHT.get_or_init(|| CGDisplay::main().bounds().size.height as i32)
 }
 
+/// Get current cursor position in screen coordinates (top-left origin)
+/// Note: CGEvent.location() already returns screen coordinates, no flip needed
 pub fn current_cursor_position() -> Option<(i32, i32)> {
-    let height = get_display_height();
-
     let source = CGEventSource::new(CGEventSourceStateID::CombinedSessionState).ok()?;
     let event = CGEvent::new(source).ok()?;
     let loc = event.location();
-    Some((loc.x as i32, height - loc.y as i32))
+    // CGEvent returns screen coordinates directly (Y=0 at top-left)
+    Some((loc.x as i32, loc.y as i32))
 }
 
 #[inline]

@@ -549,14 +549,14 @@ export default function AdvancedPanelLayout({
                     <button
                       className={settings.positionMode === "current" ? "adv-pick-btn active" : "adv-pick-btn"}
                       onClick={() => update({ positionMode: "current" })}
-                      style={{ minWidth: "80px" }}
+                      
                     >
                       Current
                     </button>
                     <button
                       className={settings.positionMode === "fixed" ? "adv-pick-btn active" : "adv-pick-btn"}
-                      onClick={() => update({ positionMode: "fixed" })}
-                      style={{ minWidth: "80px" }}
+                      onClick={() => update({ positionMode: "current" })}
+                      
                     >
                       Fixed
                     </button>
