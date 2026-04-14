@@ -1,0 +1,163 @@
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
+
+Copyright (C) 2024 Blur009
+Copyright (C) 2024 macOS Fork Contributors
+
+Everyone is permitted to copy and distribute verbatim copies of this
+license document, but changing it is not allowed.
+
+TERMS AND CONDITIONS
+
+0. Definitions.
+
+"This License" refers to version 3 of the GNU General Public License.
+
+"Copyright" also means copyright-like laws that apply to other kinds of
+works, such as semiconductor masks.
+
+"The Program" refers to any copyrightable work licensed under this
+License. Each licensee is addressed as "you". "Licensees" and
+"recipients" may be individuals or organizations.
+
+To "modify" a work means to copy from or adapt all or part of the work
+in a fashion requiring copyright permission, other than the making of
+an exact copy. The resulting work is called a "modified version" of
+the earlier work or a work "based on" the earlier work.
+
+A "covered work" means either the unmodified Program or a work based
+on the Program.
+
+1. Source Code.
+
+The "source code" for a work means the preferred form of the work
+for making modifications to it. "Object code" means any non-source
+form of a work.
+
+A "Standard Interface" means an interface that either is an official
+standard defined by a recognized standards body or, in the case of
+interfaces specified for a particular programming language, one that
+is widely used among developers working in that language.
+
+The "System Libraries" of an executable work include anything, other than
+the work as a whole, that (a) is included in the normal form of
+packaging a Major Component, but which is not part of that Major
+Component, and (b) serves only to enable use of the work with that
+Major Component, or to implement a Standard Interface for which an
+implementation is available to the public in source code form. A
+"Major Component", in this context, means a major essential component
+(kernel, window system, and so on) of the specific operating system
+(if any) on which the executable work runs, or a compiler used to
+produce the work, or an object code interpreter used to run it.
+
+2. Basic Permissions.
+
+All rights granted under this License are granted for the term of
+copyright on the Program, and are irrevocable provided the stated
+conditions are met. This explicitly clarifies the user's rights in
+relation to the four freedoms (see the full license for details).
+
+The freedom to run the Program as you wish, for any purpose.
+The freedom to study how it works and modify it so it does your computing
+as you wish.
+The freedom to redistribute copies.
+The freedom to distribute copies of your modified versions to others.
+
+3. Protecting Users' Legal Rights From Anti-Circumvention Law.
+
+No covered work shall be deemed part of an effective technological
+measure from the equivalent of the work restricted. And any
+circumvention of these arrangements for the purpose of restricting
+your activities is prohibited.
+
+4. Conveying Verbatim Copies.
+
+You may convey verbatim copies of the Program's source code as you receive
+it, in any medium, provided that you conspicuously and appropriately
+publish on each copy an appropriate copyright notice and disclaimer
+of warranty; keep intact all notices that state this License and any
+absence of any warranty; and give all other recipients of the Program
+a copy of this License along with the Program.
+
+5. Conveying Modified Source Code.
+
+You may convey a work based on the Program, or the modifications to
+produce it from the Program, in the form of source code, provided that
+you also meet all of the conditions for a permitted modification.
+
+6. Conveying Non-Source Forms.
+
+You may convey a covered work in object code form under the terms of
+sections 4 and 5, provided that you also convey the machine-readable
+source code under the terms of this License, in one of the following
+ways: by offering access to copy from a designated place, or by offering
+access to copy from a designated place for a standard price.
+
+7. Terms for Specified Permissions.
+
+Additional permissions are set out in the full GPL v3 license document.
+
+8. Termination.
+
+You may not propagate or modify a covered work except as expressly
+provided under this License. Any attempt otherwise to propagate or
+modify it is void, and will automatically terminate your rights under
+this License.
+
+9. Acceptance Not Required.
+
+You are not required to accept this License in order to receive or run
+a copy of the Program. Ancillary propagation of a covered work occurring
+solely as a consequence of using peer-to-peer transmission to receive
+a copy likewise does not require acceptance. However, nothing other
+than this License grants you permission to propagate or modify any
+covered work. These actions infringe copyright if you do not accept
+this License. Therefore, by modifying or propagating a covered work,
+you indicate your acceptance of this License to do so.
+
+10. Automatic Licensing.
+
+Each time you convey a covered work, the recipient automatically
+receives a license from the original licensor, to run, modify, and
+convey that work, subject to the stated terms. You may not impose any
+further restrictions on the exercise of the rights granted or affirmed
+under this License.
+
+11. Patents.
+
+The licensor grants you a patent license for the Program. However,
+if you patent your modifications, the patent license cannot be used
+to restrict the freedom of others to use your modifications.
+
+12. No Surrender of Freedom.
+
+If the conditions are not met, this License does not allow you to
+propagate or modify a covered work. This includes hybrid and linking
+the Program with other code.
+
+13. GPL Compatibility.
+
+This version of GPL is designed to be compatible with several other
+licenses. The licenses allowed are: AGPL, CC licenses, FDL, and
+others as detailed in the full license.
+
+14. Definitions.
+
+"Propagation" means anything that makes a copy of the work,
+"modification" means anything that creates a new version,
+and "conveyance" means any form of transmission.
+
+15. Revised Versions.
+
+This License may be called "GNU GPLv3". You can use any later versions
+of the GPL published by the Free Software Foundation.
+
+If you want to incorporate parts of the Program under other license
+terms, you must clearly indicate that license changes are required.
+
+FOR FULL LICENSE TERMS AND CONDITIONS, VISIT:
+https://www.gnu.org/licenses/gpl-3.0.en.html
+
+This is an unofficial macOS port of the original Blur Auto Clicker.
+Original project: https://github.com/Blur009/Blur-AutoClicker
+macOS fork: https://github.com/joy-arz/Blur-AutoClicker-MacOS

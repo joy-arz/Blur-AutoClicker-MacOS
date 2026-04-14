@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: transparent !important;
+        }
+        .zone {
+            position: absolute;
+            pointer-events: none;
+            border: 2px solid;
+        }
+        .zone-edge {
+            background: rgba(0, 200, 255, 0.3);
+            border-color: rgba(0, 200, 255, 0.8);
+        }
+        .zone-corner {
+            background: rgba(255, 80, 80, 0.4);
+            border-color: rgba(255, 80, 80, 0.9);
+        }
+        .zone-disabled {
+            background: rgba(128, 128, 128, 0.15);
+            border-color: rgba(128, 128, 128, 0.5);
+            border-style: dashed;
+        }
+        #overlay-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .fade-out {
+            animation: fadeOut 5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay-container"></div>
+
+    <script>
+        const container = document.getElementById('overlay-container');
+
+        function setupTauriListener() {
+            if (!window.__TAURI__ || !window.__TAURI__.event) {
+                console.log('[Overlay] Tauri not ready, retrying...');
+                setTimeout(setupTauriListener, 200);
+                return;
+            }
+
+            window.__TAURI__.event.listen('zone-data', (event) => {
+                renderZones(event.payload);
+            });
+
+            window.__TAURI__.event.listen('clear-zones', () => {
+                container.innerHTML = '';
+                container.classList.remove('fade-out');
+            });
+
+            console.log('[Overlay] Event listeners registered');
+        }
+
+        function renderZones(data) {
+            container.innerHTML = '';
+            container.classList.remove('fade-out');
+            void container.offsetWidth;
+            container.classList.add('fade-out');
+
+            if (!data) return;
+
+            const sw = data.screenWidth;
+            const sh = data.screenHeight;
+
+            if (data.edgeStopEnabled) {
+                const cTL = data.cornerStopEnabled ? data.cornerStopTL : 0;
+                const cTR = data.cornerStopEnabled ? data.cornerStopTR : 0;
+                const cBL = data.cornerStopEnabled ? data.cornerStopBL : 0;
+                const cBR = data.cornerStopEnabled ? data.cornerStopBR : 0;
+
+                // Top edge
+                addZone(cTL, 0, sw - cTL - cTR, data.edgeStopTop, 'zone-edge');
+                // Bottom edge
+                addZone(cBL, sh - data.edgeStopBottom, sw - cBL - cBR, data.edgeStopBottom, 'zone-edge');
+                // Left edge
+                addZone(0, cTL, data.edgeStopLeft, sh - cTL - cBL, 'zone-edge');
+                // Right edge
+                addZone(sw - data.edgeStopRight, cTR, data.edgeStopRight, sh - cTR - cBR, 'zone-edge');
+            }
+
+            if (data.cornerStopEnabled) {
+                addZone(0, 0, data.cornerStopTL, data.cornerStopTL, 'zone-corner');
+                addZone(sw - data.cornerStopTR, 0, data.cornerStopTR, data.cornerStopTR, 'zone-corner');
+                addZone(0, sh - data.cornerStopBL, data.cornerStopBL, data.cornerStopBL, 'zone-corner');
+                addZone(sw - data.cornerStopBR, sh - data.cornerStopBR, data.cornerStopBR, data.cornerStopBR, 'zone-corner');
+            }
+        }
+
+        function addZone(x, y, w, h, cls) {
+            if (w <= 0 || h <= 0) return;
+            const div = document.createElement('div');
+            div.className = 'zone ' + cls;
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.style.width = w + 'px';
+            div.style.height = h + 'px';
+            container.appendChild(div);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupTauriListener);
+        } else {
+            setupTauriListener();
+        }
+    </script>
+</body>
+</html>

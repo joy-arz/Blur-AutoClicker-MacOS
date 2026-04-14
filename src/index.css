@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'DMSans';
+  src: url('/fonts/DMSans.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+:root {
+  --bg-base:       hsl(0, 0%, 7%);
+  --bg-surface:    hsl(0, 0%, 9%);
+  --bg-elevated:   hsl(0, 0%, 15%);
+  --bg-input:      hsl(0, 0%, 23%);
+  --bg-input-off:  hsl(0, 0%, 20%);
+
+  --border:        hsl(0, 0%, 25%);
+  --border-focus:  hsl(0, 0%, 30%);
+  --border-subtle: hsl(0, 0%, 20%);
+
+  --text-primary:  hsla(180, 67%, 99%, 1);
+  --text-muted:    hsla(180, 67%, 99%, 0.5);
+  --text-dim:      hsla(180, 67%, 99%, 0.25);
+
+  --accent-green:  hsla(129, 77%, 43%, 0.75);
+  --accent-yellow: hsla(41, 99%, 59%, 0.75);
+  --accent-red:    hsla(4, 100%, 71%, 0.75);
+
+  --radius-sm:     6px;
+  --radius-md:     10px;
+  --radius-lg:     14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'DMSans', sans-serif;
+  font-size: 16px;
+  overflow: hidden;
+  user-select: none;
+}
+
+.app-root {
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-base);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.panel-area {
+  flex: 1;
+  padding: 20px 20px 0px 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}

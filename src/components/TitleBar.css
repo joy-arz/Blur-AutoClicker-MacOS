@@ -1,0 +1,190 @@
+button{
+  background-color: white;
+}
+
+.window-title-background {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding-inline: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  z-Index: 10;
+  flex-Shrink: 0;
+}
+
+.title-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  pointer-events: none;
+}
+
+.window-title {
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-muted);
+  letter-spacing: -4%;
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
+}
+
+.window-title-background[data-running="true"] .window-title {
+  color: #9ae7ae;
+  text-shadow:
+    0 0 10px rgba(74, 222, 128, 0.2),
+    0 0 18px rgba(74, 222, 128, 0.12);
+}
+
+.settings-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  color: var(--text-dim);
+  transition: all 0.5s ease;
+}
+
+.settings-button:hover {
+  transition-duration: 0.2s;
+  color: var(--text-primary);
+}
+.settings-svg {
+  transition: transform 0.5s ease-in-out;
+  transform: rotate(0deg);
+}
+.settings-button:hover .settings-svg{
+  transition-duration: 0.5s;
+  transform: rotate(240deg);
+}
+
+.settings-button[data-active="true"] {
+  transition-duration: 0.2s;
+  color: var(--text-primary);
+}
+
+.tab-pill {
+  /* Layout & Sizing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  min-width: 24px;
+  padding: 2px 8px;
+  
+  /* Typography */
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  
+  /* Styling */
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  cursor: pointer;
+  
+  /* Animation */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tab-pill:hover {
+  color: var(--text-muted);
+  border-color: var(--text-dim);
+}
+
+.tab-pill.active {
+  background: var(--bg-elevated);
+  border-color: var(--active-color);
+  color: var(--active-color);
+  padding: 2px 12px;
+}
+
+.window-btn {
+  /* Layout */
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Reset */
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  
+  /* Visuals */
+  color: var(--text-dim);
+  transition: all 0.15s ease;
+  -webkit-app-region: no-drag;
+}
+
+.window-btn:not(.window-btn-danger):hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.window-btn-danger:hover {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--accent-red);
+}
+
+.window-btn.active {
+  color: var(--accent-green);
+  /* background: rgba(255, 255, 255, 0.08); */
+}
+
+.window-btn.active:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* -- Title Flip Animation -- */
+
+.title-wrapper {
+  perspective: 400px;
+}
+
+.title-flipper {
+  display: inline-block;
+  transform-origin: center bottom;
+  transition: transform 0.35s ease-in, opacity 0.35s ease-in;
+}
+
+.title-flipper.flip-out {
+  transform: rotateX(90deg);
+  opacity: 0;
+}
+
+.title-flipper.flip-in {
+  animation: titleFlipIn 0.35s ease-out forwards;
+}
+
+@keyframes titleFlipIn {
+  0% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+.window-title.is-reason {
+  color: var(--accent-yellow);
+  text-shadow: 0 0 8px rgba(254, 188, 46, 0.15);
+}
