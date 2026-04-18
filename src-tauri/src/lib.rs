@@ -126,10 +126,3 @@ pub fn run() {
             }
         });
 }
-
-pub fn current_screen_size() -> Option<(i32, i32)> {
-    use core_graphics::display::CGDisplay;
-    let display = CGDisplay::main();
-    let bounds = display.bounds();
-    Some((bounds.size.width as i32, bounds.size.height as i32))
-}

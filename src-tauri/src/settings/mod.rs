@@ -19,9 +19,13 @@ pub struct ClickerSettings {
     pub time_limit: f64,
     pub time_limit_unit: String,
     pub corner_stop_enabled: bool,
+    #[serde(alias = "cornerStopTL")]
     pub corner_stop_tl: i32,
+    #[serde(alias = "cornerStopTR")]
     pub corner_stop_tr: i32,
+    #[serde(alias = "cornerStopBL")]
     pub corner_stop_bl: i32,
+    #[serde(alias = "cornerStopBR")]
     pub corner_stop_br: i32,
     pub edge_stop_enabled: bool,
     pub edge_stop_top: i32,
