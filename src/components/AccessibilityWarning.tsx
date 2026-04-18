@@ -1,10 +1,33 @@
+import { useEffect, useState } from "react";
 import "./AccessibilityWarning.css";
+import { checkAccessibilityPermission, openAccessibilitySettings } from "../store";
 
 interface Props {
-  onOpenSettings: () => void;
+  onGranted?: () => void;
 }
 
-export default function AccessibilityWarning({ onOpenSettings }: Props) {
+export default function AccessibilityWarning({ onGranted }: Props) {
+  const [checking, setChecking] = useState(false);
+
+  const handleOpenSettings = async () => {
+    await openAccessibilitySettings();
+    setChecking(true);
+  };
+
+  useEffect(() => {
+    if (!checking) return;
+
+    const interval = setInterval(async () => {
+      const granted = await checkAccessibilityPermission();
+      if (granted) {
+        setChecking(false);
+        onGranted?.();
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [checking, onGranted]);
+
   return (
     <div className="accessibility-warning">
       <div className="accessibility-warning-icon">
@@ -21,12 +44,17 @@ export default function AccessibilityWarning({ onOpenSettings }: Props) {
           Without it, the auto-clicker will not work.
         </p>
         <div className="accessibility-warning-actions">
-          <button onClick={onOpenSettings} className="accessibility-warning-btn">
+          <button onClick={handleOpenSettings} className="accessibility-warning-btn">
             Open System Settings
           </button>
           <span className="accessibility-warning-note">
             Add BlurAutoClicker to the list and enable it
           </span>
+          {checking && (
+            <span className="accessibility-warning-note" style={{ marginTop: 8 }}>
+              Checking for permission...
+            </span>
+          )}
         </div>
       </div>
     </div>

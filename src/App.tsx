@@ -17,20 +17,19 @@ import { canonicalizeHotkeyForBackend } from "./hotkeys";
 import {
   hasTelemetryConsent,
   setTelemetryConsent,
-  openAccessibilityPermission,
-} from "./store";
-import AccessibilityWarning from "./components/AccessibilityWarning";
-import {
-  DEFAULT_SETTINGS,
-  type AppInfo,
-  type ClickerStatus,
-  type Settings,
   checkAccessibilityPermission,
   clearSavedSettings,
   loadSettings,
   saveSettings,
 } from "./store";
+import AccessibilityWarning from "./components/AccessibilityWarning";
 import UpdateBanner from "./components/Updatebanner";
+import {
+  DEFAULT_SETTINGS,
+  type AppInfo,
+  type ClickerStatus,
+  type Settings,
+} from "./store";
 
 export type Tab = "simple" | "advanced" | "macro" | "settings";
 
@@ -335,7 +334,9 @@ export default function App() {
   if (!hasAccessibility) {
     return (
       <div className="app-root">
-        <AccessibilityWarning onOpenSettings={openAccessibilityPermission} />
+        <AccessibilityWarning
+          onGranted={() => setHasAccessibility(true)}
+        />
       </div>
     );
   }

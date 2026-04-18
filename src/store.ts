@@ -286,12 +286,8 @@ export async function requestAccessibilityPermission(): Promise<void> {
 
 export async function openAccessibilitySettings(): Promise<void> {
   try {
-    await invoke("open_accessibility_settings");
+    await invoke("open_accessibility_settings_cmd");
   } catch (err) {
     console.error("Failed to open accessibility settings:", err);
   }
-}
-
-export async function openAccessibilityPermission(): Promise<void> {
-  await openAccessibilitySettings();
 }

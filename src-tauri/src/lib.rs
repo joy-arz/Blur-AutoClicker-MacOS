@@ -92,7 +92,7 @@ pub fn run() {
             updates::update_checker::check_for_updates,
             accessibility::check_accessibility_permission,
             accessibility::request_accessibility_permission,
-            accessibility::open_accessibility_settings,
+            accessibility::open_accessibility_settings_cmd,
         ])
         .build(tauri::generate_context!())
         .expect("error while building tauri application")

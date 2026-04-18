@@ -9,22 +9,11 @@ pub fn check_accessibility() -> bool {
     unsafe { AXIsProcessTrusted() }
 }
 
-pub fn prompt_accessibility() {
-    let check_script = r#"
-        tell application "System Events"
-            return UI elements enabled
-        end tell
-    "#;
-
-    let output = Command::new("osascript")
-        .args(["-e", check_script])
-        .output();
-
-    if output.map(|o| o.status.success()).unwrap_or(false) {
-        return;
-    }
-
-    if let Err(e) = Command::new("open").args(["x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"]).spawn() {
+pub fn open_accessibility_settings() {
+    if let Err(e) = Command::new("open")
+        .args(["x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility"])
+        .spawn()
+    {
         log::error!("[Accessibility] Failed to open System Settings: {}", e);
     }
 }
@@ -36,10 +25,10 @@ pub fn check_accessibility_permission() -> bool {
 
 #[tauri::command]
 pub fn request_accessibility_permission() {
-    prompt_accessibility();
+    open_accessibility_settings();
 }
 
 #[tauri::command]
-pub fn open_accessibility_settings() {
-    prompt_accessibility();
+pub fn open_accessibility_settings_cmd() {
+    open_accessibility_settings();
 }
