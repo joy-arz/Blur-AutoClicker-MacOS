@@ -1,17 +1,17 @@
 # Blur Auto Clicker for macOS
 
-> **Original Project:** [Blur Auto Clicker v3.4.1](https://github.com/Blur009/Blur-AutoClicker) by Blur009 (Windows)
+> **Original Project:** [Blur Auto Clicker](https://github.com/Blur009/Blur-AutoClicker) by Blur009 (Windows)
 > **macOS Fork:** [joy-arz/Blur-AutoClicker-MacOS](https://github.com/joy-arz/Blur-AutoClicker-MacOS)
 
-**Current Version:** 3.2.1 (macOS fork) - Aligned with Windows v3.4.1 bug fixes
-
-<p align="center"><em>An accuracy and performance focused auto clicker for macOS</em></p>
+**Current Version:** 3.2.2 (macOS fork)
 
 ---
 
 ## ⚠️ About This Fork
 
-This is a **macOS fork** of the original [Blur Auto Clicker](https://github.com/Blur009/Blur-AutoClicker) project. The original was Windows-only; this version ports it to macOS using Rust + Tauri v2 while maintaining feature parity.
+This is a **macOS fork** of the original [Blur Auto Clicker](https://github.com/Blur009/Blur-AutoClicker) project. The original was Windows-only; this version ports it to macOS using Rust + Tauri v2.
+
+**This fork is now independently developed and no longer follows the Windows release cycle.**
 
 ### Original Project
 - **Author:** [Blur009](https://github.com/Blur009)
