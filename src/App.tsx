@@ -47,9 +47,16 @@ const DEFAULT_APP_INFO: AppInfo = {
 };
 
 async function syncSettingsToBackend(settings: Settings) {
-  await invoke("update_settings", {
-    settings,
-  });
+  try {
+    console.log("[App] syncSettingsToBackend: sending settings.clickSpeed=", settings.clickSpeed);
+    const result = await invoke<Settings>("update_settings", {
+      settings,
+    });
+    console.log("[App] syncSettingsToBackend: result.clickSpeed=", result?.clickSpeed);
+  } catch (err) {
+    console.error("[App] syncSettingsToBackend ERROR:", err);
+    throw err;
+  }
 }
 
 function wait(ms: number) {
@@ -75,11 +82,16 @@ export default function App() {
 
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const persistSettings = (nextSettings: Settings) => {
+    console.log("[App] persistSettings called: settingsLoaded=", settingsLoaded, "clickSpeed=", nextSettings.clickSpeed);
     settingsRef.current = nextSettings;
     setSettings(nextSettings);
 
-    if (!settingsLoaded) return;
+    if (!settingsLoaded) {
+      console.log("[App] persistSettings: settingsLoaded is false, skipping sync");
+      return;
+    }
 
+    console.log("[App] persistSettings: syncing to backend, clickSpeed=", nextSettings.clickSpeed);
     syncSettingsToBackend(nextSettings).catch((err) => {
       console.error("Failed to sync settings:", err);
     });
@@ -132,6 +144,7 @@ export default function App() {
         setAppInfo(loadedAppInfo);
         setStatus(loadedStatus);
         setSettingsLoaded(true);
+        console.log("[App] settingsLoaded set to true, clickSpeed=", hydratedSettings.clickSpeed);
 
         const accessibilityGranted = await checkAccessibilityPermission();
         setHasAccessibility(accessibilityGranted);
@@ -139,7 +152,9 @@ export default function App() {
           console.warn("Accessibility permission not granted - clicker will not work");
         }
 
+        console.log("[App] Syncing initial settings to backend, clickSpeed=", hydratedSettings.clickSpeed);
         await syncSettingsToBackend(hydratedSettings);
+        console.log("[App] Initial settings synced successfully");
         await invoke("register_hotkey", { hotkey: hydratedSettings.hotkey });
 
         if (canonicalHotkey !== loadedSettings.hotkey) {
