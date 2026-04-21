@@ -45,6 +45,12 @@ pub fn update_settings(
     let state = app.state::<ClickerState>();
     let was_initialized = state.settings_initialized.load(Ordering::SeqCst);
 
+    log::info!(
+        "[Settings] update_settings called: click_speed={}, mode={}",
+        settings.click_speed,
+        settings.mode
+    );
+
     *state.settings.lock().unwrap() = settings.clone();
 
     if !was_initialized {

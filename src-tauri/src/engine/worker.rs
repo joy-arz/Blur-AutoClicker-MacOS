@@ -64,8 +64,8 @@ pub fn start_clicker_inner(app: &AppHandle) -> Result<ClickerStatusPayload, Stri
     DEV_LOGGER.log(
         "WORKER",
         &format!(
-            "config built successfully: button={}, pos_x={}, pos_y={}",
-            config.button, config.pos_x, config.pos_y
+            "config built successfully: button={}, interval={}, click_speed_from_settings={}, mode={}",
+            config.button, config.interval, settings.click_speed, settings.mode
         ),
     );
     state.running.store(true, Ordering::SeqCst);

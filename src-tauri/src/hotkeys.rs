@@ -149,9 +149,9 @@ pub fn handle_hotkey_pressed(app: &AppHandle) {
     DEV_LOGGER.log("HOTKEY", "handle_hotkey_pressed called");
     let mode = {
         let state = app.state::<ClickerState>();
-        let mode = state.settings.lock().unwrap().mode.clone();
-        DEV_LOGGER.log("HOTKEY", &format!("mode='{}'", mode));
-        mode
+        let settings = state.settings.lock().unwrap().clone();
+        DEV_LOGGER.log("HOTKEY", &format!("mode='{}', click_speed={}", settings.mode, settings.click_speed));
+        settings.mode.clone()
     };
 
     if mode == "Toggle" {
