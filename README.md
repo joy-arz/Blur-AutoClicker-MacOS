@@ -5,6 +5,8 @@
 
 **Current Version:** 3.2.2 (macOS fork)
 
+[![Download from GitHub](https://img.shields.io/badge/Download-GitHub-blue?style=for-the-badge)](https://github.com/joy-arz/Blur-AutoClicker-MacOS/releases/latest)
+
 ---
 
 ## ⚠️ About This Fork
