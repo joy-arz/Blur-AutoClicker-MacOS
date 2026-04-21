@@ -77,6 +77,13 @@ These bugs were **discovered and fixed during this macOS port**:
 | **Version type mismatch** | Code review | Backend now uses string version consistently |
 | **Top-level await in store** | Code review | Replaced with lazy initialization with fallback |
 | **Rust telemetry on close** | Code review | Now uses actual settings from state, not defaults |
+| **Multi-monitor failsafe** | [@0ywfe](https://github.com/0ywfe) | Use `CGDisplay::active_displays()` for proper multi-monitor support |
+| **serde alias for corner fields** | [@0ywfe](https://github.com/0ywfe) | Fix `cornerStopTL` → `cornerStopTl` deserialization issue |
+
+### Contributors
+
+Thanks to our contributors:
+- [@0ywfe](https://github.com/0ywfe) - Multi-monitor failsafe fix, serde aliases for settings
 
 ### v3.3.0 Alignment (Windows → macOS)
 
