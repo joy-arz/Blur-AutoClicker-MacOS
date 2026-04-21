@@ -1,6 +1,6 @@
 [package]
 name = "blur-autoclicker"
-version = "3.2.1"
+version = "3.2.2"
 description = "BlurAutoClicker - An accuracy and performance focused auto clicker"
 authors = ["Blur009"]
 edition = "2021"
