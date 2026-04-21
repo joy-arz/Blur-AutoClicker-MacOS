@@ -21,7 +21,7 @@ export default function SimplePanel({ settings, update }: Props) {
               className="simple-number"
               value={settings.clickSpeed}
               min={1}
-              max={500}
+              max={2000}
               onChange={(e) => {
                 const raw = e.target.value.replace(/^0+(?=\d)/, "");
                 if (raw !== e.target.value) e.target.value = raw;

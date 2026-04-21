@@ -163,7 +163,7 @@ function sanitizeSettings(input?: Partial<Settings> | null): Settings {
       saved.clickSpeed,
       DEFAULT_SETTINGS.clickSpeed,
       1,
-      500,
+      2000,
     ),
     dutyCycleEnabled: sanitizeBoolean(
       saved.dutyCycleEnabled,

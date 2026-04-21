@@ -124,7 +124,7 @@ This matches Windows `SendInput` behavior for better performance.
 
 These features **inspired** improvements but were implemented differently:
 
-- **inket/Autoclick** - Simpler codebase approach, higher CPS limit (900)
+- **inket/Autoclick** - Simpler codebase approach
 - **othyn/macos-auto-clicker** - SwiftUI patterns, keyboard pressing, i18n
 - **MrTanoshii/rusty-autoclicker** - Rust architecture patterns, mouse handling
 
@@ -133,7 +133,7 @@ These features **inspired** improvements but were implemented differently:
 ## Original Features (Windows → macOS Port)
 
 ### Core Features (Ported)
-- ✅ High CPS Support (500+ CPS sustained)
+- ✅ High CPS Support (2000+ CPS sustained)
 - ✅ Toggle/Hold activation modes
 - ✅ Multiple mouse buttons (Left, Middle, Right)
 - ✅ Current/Fixed Position modes
