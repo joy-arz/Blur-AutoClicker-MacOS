@@ -105,7 +105,9 @@ export default function App() {
   };
 
   const updateSettings = (patch: Partial<Settings>) => {
-    persistSettings({ ...settingsRef.current, ...patch });
+    const newSettings = { ...settingsRef.current, ...patch };
+    console.log("[App] updateSettings: patch=", patch, "newSettings.clickSpeed=", newSettings.clickSpeed);
+    persistSettings(newSettings);
   };
 
   const applyStartupWindowPlacement = async () => {
